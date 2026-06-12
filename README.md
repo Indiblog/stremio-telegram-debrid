@@ -100,6 +100,36 @@ You can upload a '.zip' file (or a split ZIP like '.zip.001', '.zip.002', etc.) 
 > - **Why?** To skip to a certain part of a video inside a ZIP file, the server has to download and unpack the ZIP file from the very beginning up to that point. For large media files, this takes too much time, and your Stremio player will freeze or disconnect.
 > - **Easy Fix**: If you want to skip/seek through your videos, **do not upload them in a ZIP file**. Upload them **directly as video files ('.mp4', '.mkv', etc.)** or as split video files ('.001', '.002', etc.), and seeking will work perfectly!
 
+
+
+## 📂 Naming and Matching Guide
+
+To make sure the addon successfully finds your files and matches them perfectly when you play them, name your files or write your Telegram message captions using this simple format:
+
+"
+[Title Name] [Season/Episode Info] [Any Extra Tags].extension
+"
+
+### 3 Simple Rules to Follow:
+
+1. **Rule 1: Put the Title at the Very Start**
+   - The exact name of your show or video must be the first thing in the filename or caption. 
+   - Case-insensitive (e.g., 'Show Name' or 'show name' are both fine).
+   - Spaces, dots, or dashes are all supported (e.g., 'Show Name' or 'Show.Name').
+
+2. **Rule 2: Put the Season and Episode Info Right After the Title**
+   - This helps the system identify which episode you are selecting.
+   - You can write this in almost any style:
+     - **Standard**: 'S01E02', 's1e2', 's01.e02', '1x02', '01x02'
+     - **Plain Text**: 'Season 1 Episode 2', 'Season01 Episode02'
+     - **Spanish / Latino**: 'Temporada 1 Capitulo 2', 'temp 2 cap 5', 't1 c2'
+     - **Reverse (Episode first)**: 'e2-s1', 'e2xs1', 'episode 2 season 1', 'chapter two season one'
+     - **Standalone Episode** (no season): 'Ep 23', 'capitulo 5', '[05]', '- 02 -' (this defaults to Season 1)
+
+3. **Rule 3: Put Everything Else at the Very End**
+   - Put extra details like resolution, audio type, or download group links 'after' the season and episode (e.g., 'Show Name S01E01 [1080p] [Dual Audio].mkv').
+   - This ensures that tags or promotional text do not confuse the search system.
+
 ---
 
 ## System Architecture

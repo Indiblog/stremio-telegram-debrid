@@ -123,6 +123,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# Telegram / Pyrogram Session Files
+*.session
+*.session-journal
+
 # Spyder project settings
 .spyderproject
 .spyder-py3
