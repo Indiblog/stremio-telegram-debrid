@@ -398,6 +398,53 @@ Build and start the container using Docker Compose:
 docker-compose up --build
 ```
 
+### Option C: Self-Hosting on VPS (Viren070's Docker Template)
+If you self-host your addons using Viren070's docker-compose template, you can easily integrate this addon:
+
+1. Create a directory named 'stremio-telegram-debrid' inside your 'apps/' folder.
+2. Create a 'compose.yaml' file in that directory. You can download our pre-configured [compose.yaml](file:///c:/Users/roy/Desktop/stremio-telegram-debrid/deployment/vps/compose.yaml) template directly by running:
+   ```bash
+   curl -s https://raw.githubusercontent.com/SunilRoy-dev/stremio-telegram-debrid/main/deployment/vps/compose.yaml -o apps/stremio-telegram-debrid/compose.yaml
+   ```
+   Or create the file manually with the following configuration:
+
+```yaml
+services:
+  stremio-telegram-debrid:
+    container_name: stremio-telegram-debrid
+    image: ghcr.io/sunilroy-dev/stremio-telegram-debrid:latest
+    restart: unless-stopped
+    environment:
+      - PORT=7860
+      - API_ID=${TELEGRAM_API_ID}
+      - API_HASH=${TELEGRAM_API_HASH}
+      - BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - USER_SESSION_STRING=${TELEGRAM_USER_SESSION_STRING}
+      - TELEGRAM_CHANNEL_ID=${TELEGRAM_CHANNEL_ID}
+      - LOG_CHANNEL_ID=${TELEGRAM_LOG_CHANNEL_ID}
+      - API_KEY=${ADDON_API_KEY}
+      - CACHE_TTL=${ADDON_CACHE_TTL}
+      - TIMEZONE=${ADDON_TIMEZONE}
+    profiles:
+      - stremio-telegram-debrid
+      - debrid
+      - addon
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.stremio-telegram-debrid.rule=Host('stremio-tg.${DOMAIN}')"
+      - "traefik.http.routers.stremio-telegram-debrid.entrypoints=websecure"
+      - "traefik.http.routers.stremio-telegram-debrid.tls.certresolver=http"
+      - "traefik.http.services.stremio-telegram-debrid.loadbalancer.server.port=7860"
+
+networks:
+  traefik:
+    external: true
+```
+
+3. Configure the environment variables in your global '.env' file, activate the 'stremio-telegram-debrid' profile, and run your deployment.
+
 ---
 
 ## How to Install in Stremio
