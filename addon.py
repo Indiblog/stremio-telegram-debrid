@@ -123,11 +123,20 @@ def get_manifest(api_key: str = ""):
         "resources": ["meta", "stream", "subtitles"],
         "types": ["movie", "series"],
         "idPrefixes": ["tgfile_", "tt"],
-        "catalogs": [],
-        "behaviorHints": {
-            "configurable": False,
-            "configurationRequired": False
-        }
+       "catalogs": [
+    {
+        "type": "movie",
+        "id": "tg_catalog",
+        "name": "Telegram Files",
+        "extra": [{"name": "search", "isRequired": False}]
+    },
+    {
+        "type": "series",
+        "id": "tg_catalog",
+        "name": "Telegram Files",
+        "extra": [{"name": "search", "isRequired": False}]
+    }
+],
     }
 
 @app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
